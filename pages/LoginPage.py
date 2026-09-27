@@ -12,6 +12,9 @@ class LoginPageLocators:
     QR_CODE_TAB = (By.CSS_SELECTOR, "[data-test-id='tab-qr']")
     QR_CODE = (By.CSS_SELECTOR, "[data-test-id='qr-placeholder']")
     ERROR_MESSAGE_LOGIN = (By.CSS_SELECTOR, "[data-test-id='login-error']")
+    RESTORE_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-recover-btn']")
+    CANCEL_RESTORE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-cancel-btn']")
+    REGISTER_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-register-btn']")
 
 
 class LoginPageHelper(BasePage):
@@ -20,6 +23,8 @@ class LoginPageHelper(BasePage):
         self.check_page()
 
     def check_page(self):
+        with allure.step("Проверяем корреткность загрузки страницы"):
+            self.attach_screenshot()
         self.find_element(LoginPageLocators.LOGIN_FIELD)
         self.find_element(LoginPageLocators.PASSWORD_FIELD)
         self.find_element(LoginPageLocators.LOGIN_BUTTON)
@@ -36,6 +41,17 @@ class LoginPageHelper(BasePage):
         self.attach_screenshot()
         return self.find_element(LoginPageLocators.ERROR_MESSAGE_LOGIN).text
 
-    @allure.step('Заполняем логин инпут')
-    def fill_login_input(self, text):
-        self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(text)
+    @allure.step('Заполняем поле логин')
+    def fill_login(self, login):
+        self.find_element(LoginPageLocators.LOGIN_FIELD).send_keys(login)
+        self.attach_screenshot()
+
+    @allure.step('Заполняем поле пароль')
+    def fill_password(self, password):
+        self.find_element(LoginPageLocators.PASSWORD_FIELD).send_keys(password)
+        self.attach_screenshot()
+
+    @allure.step('Переходим к восстановлению')
+    def click_recovery_button(self):
+        self.attach_screenshot()
+        self.find_element(LoginPageLocators.RESTORE_PROFILE_BUTTON).click()
