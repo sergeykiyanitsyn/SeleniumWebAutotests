@@ -14,7 +14,9 @@ class LoginPageLocators:
     ERROR_MESSAGE_LOGIN = (By.CSS_SELECTOR, "[data-test-id='login-error']")
     RESTORE_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-recover-btn']")
     CANCEL_RESTORE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-cancel-btn']")
-    REGISTER_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-register-btn']")
+    LOCKOUT_REGISTER_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='lockout-register-btn']")
+    REGISTER_PROFILE_BUTTON = (By.CSS_SELECTOR, "[data-test-id='hero-register-btn']")
+
 
 
 class LoginPageHelper(BasePage):
@@ -23,7 +25,7 @@ class LoginPageHelper(BasePage):
         self.check_page()
 
     def check_page(self):
-        with allure.step("Проверяем корреткность загрузки страницы"):
+        with allure.step("Проверяем корректность загрузки страницы Логина"):
             self.attach_screenshot()
         self.find_element(LoginPageLocators.LOGIN_FIELD)
         self.find_element(LoginPageLocators.PASSWORD_FIELD)
@@ -55,3 +57,8 @@ class LoginPageHelper(BasePage):
     def click_recovery_button(self):
         self.attach_screenshot()
         self.find_element(LoginPageLocators.RESTORE_PROFILE_BUTTON).click()
+
+    @allure.step('Клик по кнопке "Зарегистрироваться"')
+    def click_registration_button(self):
+        self.attach_screenshot()
+        self.find_element(LoginPageLocators.REGISTER_PROFILE_BUTTON).click()
