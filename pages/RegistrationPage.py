@@ -1,6 +1,6 @@
 import allure
 
-from pages.BasePage import BasePage
+from pages.BasePage import BasePageHelper
 from selenium.webdriver.common.by import By
 
 
@@ -30,7 +30,7 @@ class RegistrationPageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "[data-test-id='login-link-anchor']")
 
 
-class RegistrationPageHelpers(BasePage):
+class RegistrationPageHelpersHelper(BasePageHelper):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver

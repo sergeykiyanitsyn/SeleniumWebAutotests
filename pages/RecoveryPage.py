@@ -1,7 +1,7 @@
 import allure
 from selenium.webdriver.common.by import By
 
-from pages.BasePage import BasePage
+from pages.BasePage import BasePageHelper
 
 
 class RecoveryPageLocators:
@@ -11,7 +11,7 @@ class RecoveryPageLocators:
     SUPPORT_BUTTON = (By.CSS_SELECTOR, "[data-test-id='support-contact-btn']")
 
 
-class RecoveryPageHelper(BasePage):
+class RecoveryPageHelperHelper(BasePageHelper):
     def __init__(self, driver):
         self.driver = driver
         self.check_page()
