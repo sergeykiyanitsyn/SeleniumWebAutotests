@@ -1,12 +1,12 @@
 import allure
 
-from pages.BasePage import BasePage
+from pages.BasePage import BasePageHelper
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 import random
 
 
-class RegistrationByPhonePageLocators(BasePage):
+class RegistrationByPhonePageHelperLocators(BasePageHelper):
     @staticmethod
     def country_item(number):
         return (
@@ -19,7 +19,7 @@ class RegistrationByPhonePageLocators(BasePage):
     COUNTRY_LIST = (By.CSS_SELECTOR, '[data-test-id="phone-country-select"]')
 
 
-class RegistrationByPhonePageHelpers(BasePage):
+class RegistrationByPhonePageHelpersHelper(BasePageHelper):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -28,14 +28,14 @@ class RegistrationByPhonePageHelpers(BasePage):
     def check_page(self):
         with allure.step('Проверяем корректность загрузки страницы Регистрации по телефону'):
             self.attach_screenshot()
-        self.find_element(RegistrationByPhonePageLocators.PHONE_INPUT)
-        self.find_element(RegistrationByPhonePageLocators.COUNTRY_LIST)
-        self.find_element(RegistrationByPhonePageLocators.SEND_CODE_BUTTON)
+        self.find_element(RegistrationByPhonePageHelperLocators.PHONE_INPUT)
+        self.find_element(RegistrationByPhonePageHelperLocators.COUNTRY_LIST)
+        self.find_element(RegistrationByPhonePageHelperLocators.SEND_CODE_BUTTON)
 
     @allure.step('Выбираем случайную страну и возвращаем её код')
     def select_random_country(self):
         country_select = Select(
-            self.find_element(RegistrationByPhonePageLocators.COUNTRY_LIST)
+            self.find_element(RegistrationByPhonePageHelperLocators.COUNTRY_LIST)
         )
         index = random.randrange(len(country_select.options))
         country_select.select_by_index(index)
@@ -45,4 +45,4 @@ class RegistrationByPhonePageHelpers(BasePage):
     @allure.step('Получаем Код страны из поля "Код страны"')
     def get_phone_field_value(self):
         self.attach_screenshot()
-        return self.find_element(RegistrationByPhonePageLocators.COUNTRY_LIST).get_attribute("value")
+        return self.find_element(RegistrationByPhonePageHelperLocators.COUNTRY_LIST).get_attribute("value")

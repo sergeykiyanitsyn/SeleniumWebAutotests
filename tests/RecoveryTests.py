@@ -2,9 +2,9 @@ import allure
 from faker import Faker
 
 from core.BaseTest import browser
-from pages.BasePage import BasePage
-from pages.LoginPage import LoginPageHelper
-from pages.RecoveryPage import RecoveryPageHelper
+from pages.BasePage import BasePageHelper
+from pages.LoginPage import LoginPageHelperHelper
+from pages.RecoveryPage import RecoveryPageHelperHelper
 
 fake = Faker('ru_RU')
 
@@ -16,8 +16,8 @@ PASSWORD = 'PASSWORD'
 @allure.suite('Check Recovery user login')
 @allure.title('Check move to recovery user after some fail attempts authorization')
 def test_go_to_recovery_after_many_fails(browser):
-    BasePage(browser).get_url(BASE_URL)
-    LoginPage = LoginPageHelper(browser)
+    BasePageHelper(browser).get_url(BASE_URL)
+    LoginPage = LoginPageHelperHelper(browser)
     LoginPage.fill_login(LOGIN_EMAIL)
 
     for _ in range(3):
@@ -25,4 +25,4 @@ def test_go_to_recovery_after_many_fails(browser):
         LoginPage.click_login_button()
 
     LoginPage.click_recovery_button()
-    RecoveryPageHelper(browser)
+    RecoveryPageHelperHelper(browser)

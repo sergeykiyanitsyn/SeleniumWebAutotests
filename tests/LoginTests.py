@@ -1,8 +1,8 @@
 import allure
 
 from core.BaseTest import browser
-from pages.BasePage import BasePage
-from pages.LoginPage import LoginPageHelper
+from pages.BasePage import BasePageHelper
+from pages.LoginPage import LoginPageHelperHelper
 from faker import Faker
 
 fake = Faker('ru_RU')
@@ -15,8 +15,8 @@ EMPTY_LOGIN_ERROR = 'Введите телефон, email или логин и �
 @allure.suite('Check form authorisation')
 @allure.title('Empty form authorisation return error')
 def test_empty_login_and_password(browser):
-    BasePage(browser).get_url(BASE_URL)
-    LoginPage = LoginPageHelper(browser)
+    BasePageHelper(browser).get_url(BASE_URL)
+    LoginPage = LoginPageHelperHelper(browser)
     LoginPage.click_login_button()
     assert LoginPage.get_error_message() == EMPTY_LOGIN_ERROR
 
@@ -27,8 +27,8 @@ def test_empty_login_and_password(browser):
 def test_empty_password(browser):
     login_email = fake.email()
 
-    BasePage(browser).get_url(BASE_URL)
-    LoginPage = LoginPageHelper(browser)
+    BasePageHelper(browser).get_url(BASE_URL)
+    LoginPage = LoginPageHelperHelper(browser)
     LoginPage.fill_login(login_email)
     LoginPage.click_login_button()
     assert LoginPage.get_error_message() == EMPTY_LOGIN_ERROR
